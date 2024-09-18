@@ -20,7 +20,7 @@ class UserDetails(models.Model):
 
 class InteriorDesigner(models.Model):
     user_details = models.ForeignKey(UserDetails, on_delete=models.CASCADE, related_name='designer')
-    years_of_experience = models.IntegerField(max_length=20)
+    years_of_experience = models.IntegerField()
     specialization = models.CharField(max_length=100)
     portfolio = models.CharField(max_length=100)
     

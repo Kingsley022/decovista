@@ -22,4 +22,15 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
     
-    
+
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_reviews")
+    designer = models.ForeignKey('users.InteriorDesigner', on_delete=models.CASCADE, related_name="designer_reviews")
+    rating = models.IntegerField(default=1)  
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review {self.review_id} for {self.product.product_name}"
