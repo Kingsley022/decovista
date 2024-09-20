@@ -1,1 +1,128 @@
-auth/jwt/create/  = for login users
+
+actions : login
+endpoint : auth/jwt/create/
+method : Post
+data params : 
+    - username: string
+    - password: string
+
+actions : refresh JWT
+endpoint : auth/jwt/refresh/
+method : Post
+data params : 
+    - refresh: string
+
+actions : verify JWT
+endpoint : auth/jwt/verify/
+method : Post
+data params : 
+    - token: string
+
+actions : user registration
+endpoint : auth/users/
+method : Post
+data params : 
+    - username: string
+    - password: string
+    - email: string (optional)
+    - other custom fields if any
+
+actions : user activation
+endpoint : auth/users/activation/
+method : Post
+data params : 
+    - uid: string
+    - token: string
+
+actions : resend activation
+endpoint : auth/users/resend_activation/
+method : Post
+data params : 
+    - email: string
+
+actions : user details
+endpoint : auth/users/me/
+method : Get
+data params : None
+
+actions : update user details
+endpoint : auth/users/me/
+method : Put/Patch
+data params : 
+    - username: string (optional)
+    - email: string (optional)
+    - other custom fields if any
+
+actions : delete user
+endpoint : auth/users/me/
+method : Delete
+data params : None
+
+actions : set password
+endpoint : auth/users/set_password/
+method : Post
+data params : 
+    - current_password: string
+    - new_password: string
+
+actions : reset password
+endpoint : auth/users/reset_password/
+method : Post
+data params : 
+    - email: string
+
+actions : confirm password reset
+endpoint : auth/users/reset_password_confirm/
+method : Post
+data params : 
+    - uid: string
+    - token: string
+    - new_password: string
+
+actions : set username
+endpoint : auth/users/set_username/
+method : Post
+data params : 
+    - current_password: string
+    - new_username: string
+
+actions : reset username
+endpoint : auth/users/reset_username/
+method : Post
+data params : 
+    - email: string
+
+actions : confirm username reset
+endpoint : auth/users/reset_username_confirm/
+method : Post
+data params : 
+    - uid: string
+    - token: string
+    - new_username: string
+
+actions : user list (if enabled)
+endpoint : auth/users/
+method : Get
+data params : None
+
+actions : user detail (if enabled)
+endpoint : auth/users/{id}/
+method : Get
+data params : None
+
+
+
+
+
+
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNzExMjYyMywiaWF0IjoxNzI2NzY3MDIzLCJqdGkiOiI4ZjE2Y2U0NGFjYmM0NzNlOTY2YzNjMWE1M2M5ODEyNiIsInVzZXJfaWQiOjF9.EjfaM3MlQR1FpzRiSgxeWmotyfw80jKEiPY83rNjwpI",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI3MDI2MjIzLCJpYXQiOjE3MjY3NjcwMjMsImp0aSI6IjNjZTAxZjQ4MGU5ZjRmNDViNTU3MDgwMzljMDc3YWVkIiwidXNlcl9pZCI6MX0.498vtu0EGCMmnbPb7dL5COkNADIzRkEADteuUeYDgEo",
+    "id": 1,
+    "first_name": "",
+    "last_name": "",
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "is_active": true
+}
