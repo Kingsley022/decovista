@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status  # Import status
+from django import Http404
 from .models import Consultation
 from .serializers import ConsultationSerializer
 
@@ -19,9 +20,6 @@ class ConsultationView(APIView):
      
 
 class ConsultationDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
     def get_object(self, pk):
         try:
             return Consultation.objects.get(pk=pk)

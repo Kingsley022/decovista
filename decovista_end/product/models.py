@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 
-# Create your models here.
+# Create your models here.  
 
 class Products(models.Model):
     designer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
@@ -27,7 +27,7 @@ class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
     product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_reviews")
-    designer = models.ForeignKey('users.InteriorDesigner', on_delete=models.CASCADE, related_name="designer_reviews")
+    designer = models.ForeignKey('users.DesignerDetails', on_delete=models.CASCADE, related_name="designer_reviews")
     rating = models.IntegerField(default=1)  
     comment = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
