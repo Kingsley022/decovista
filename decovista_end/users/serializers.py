@@ -1,23 +1,23 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer, UserSerializer as BaseUserSerializer
-from .models import UserDetails, InteriorDesigner, User
+from .models import UserDetails, DesignerDetails, User
 
 class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserDetails
         fields = ['role', 'contact_number', 'address']
 
-class InteriorDesignerSerializer(serializers.ModelSerializer):
+class DesignerDetailsSerializer(serializers.ModelSerializer):
     user_details = UserDetailsSerializer(required=False, many=True)
 
     class Meta:
-        model = InteriorDesigner
+        model = DesignerDetails
         fields = ['years_of_experience', 'specialization', 'portfolio', 'user_details']
 
 class CustomUserCreateSerializer(BaseUserCreateSerializer):
     user_details = UserDetailsSerializer(required=False, many=True)
-    designer = InteriorDesignerSerializer(required=False, many=True)
+    designer = DesignerDetailsSerializer(required=False, many=True)
 
     class Meta(BaseUserCreateSerializer.Meta):
         model = User
@@ -51,7 +51,7 @@ class CustomUserCreateSerializer(BaseUserCreateSerializer):
 class CustomUserSerializer(BaseUserSerializer):
     # user_details = UserDetailsSerializer(read_only=True, source='user_details.first') # Use .first() to get the first UserDetails object
     user_details = UserDetailsSerializer(read_only=True, many=True) # Use many=True to get multiple related objects,
-    designer = InteriorDesignerSerializer(read_only=True, source='user_details.designer')
+    designer = DesignerDetailsSerializer(read_only=True, source='user_details.designer')
 
     class Meta(BaseUserSerializer.Meta):
         fields = BaseUserSerializer.Meta.fields + ('user_details', 'designer')
@@ -73,7 +73,7 @@ class CustomUserSerializer(BaseUserSerializer):
         try:
             designer = user_details.first().designer if user_details.exists() else None
             if designer:
-                response['designer'] = InteriorDesignerSerializer(designer).data
+                response['designer'] = DesignerDetailsSerializer(designer).data
             else:
                 response['designer'] = None
         except AttributeError:
