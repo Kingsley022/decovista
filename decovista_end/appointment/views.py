@@ -4,6 +4,7 @@ from rest_framework import status  # Import status
 from django import Http404
 from .models import Consultation
 from .serializers import ConsultationSerializer
+from django.http import Http404
 
 class ConsultationView(APIView):
     def get(self, request, format=None):
