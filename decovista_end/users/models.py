@@ -1,6 +1,10 @@
 from django.db import models
+<<<<<<< HEAD
+from django.contrib.auth.models import User
+=======
 from django.contrib.auth.models import AbstractUser
 # from django.contrib.auth.models import User
+>>>>>>> 9b04af2db3b7a24ac9658da3988d9f844dc6bf3c
 
 class User(AbstractUser):
     ROLES = (
@@ -12,7 +16,6 @@ class User(AbstractUser):
     
     def __str__(self) -> str:
         return super().__str__()
-
 
 class UserDetails(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_details')
@@ -28,10 +31,16 @@ class UserDetails(models.Model):
     
 
 class DesignerDetails(models.Model):
+<<<<<<< HEAD
+    user_details = models.OneToOneField(UserDetails, on_delete=models.CASCADE, related_name='designer')
+    years_of_experience = models.CharField(max_length=100)
+    specializations= models.CharField(max_length=100)
+=======
     user_details = models.OneToOneField(User, on_delete=models.CASCADE, related_name='designer_details')
     years_of_experience = models.CharField(max_length=100)
     specializations = models.CharField(max_length=100)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+>>>>>>> 9b04af2db3b7a24ac9658da3988d9f844dc6bf3c
     portfolio = models.CharField(max_length=100)
     portfolio_link = models.URLField(max_length=200, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)

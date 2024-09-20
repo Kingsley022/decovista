@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 
-# Create your models here.
+# Create your models here.  
 
 class Products(models.Model):
     designer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
