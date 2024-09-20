@@ -39,7 +39,7 @@ class CustomUserCreateSerializer(BaseUserCreateSerializer):
 
                 if designer_data:
                     for data in designer_data:
-                        InteriorDesigner.objects.create(user_details=user_details, **data)
+                        DesignerDetails.objects.create(user_details=user_details, **data)
 
         return user
 
