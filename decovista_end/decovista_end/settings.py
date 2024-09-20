@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third party apps
     "corsheaders",
     'rest_framework',
+    'rest_framework_simplejwt',
     'djoser',
     
     # Our apps
@@ -148,6 +149,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Setting Up User Authentication with Djoser and JWT
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+    'users.backends.EmailOrUsernameModelBackend',  # Custom backend
+]
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.IsAuthenticated',
@@ -167,8 +174,8 @@ SIMPLE_JWT = {
 
 
 DJOSER = {
-    'LOGIN_FIELD': 'username',
-    'USER_CREATE_PASSWORD_RETYPE': True,
+    'LOGIN_FIELD':'username',
+    'USER_CREATE_PASSWORD_RETYPE': False,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'SEND_CONFIRMATION_EMAIL': False,

@@ -4,11 +4,11 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     ROLES = (
-        ('designer', 'Designer'),
-        ('user', 'User')
+        ('designer', 'designer'),
+        ('user', 'user')
     )
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=100, choices=ROLES, default='User')
+    role = models.CharField(max_length=100, choices=ROLES, default='user')
     
     def __str__(self) -> str:
         return super().__str__()
