@@ -3,16 +3,32 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import CustomTokenObtainPairSerializer, UserDetailsSerializer, InteriorDesignerSerializer
+from .serializers import CustomTokenObtainPairSerializer, UserDetailsSerializer, InteriorDesignerSerializer, CustomUserCreateSerializer
 from .models import UserDetails, InteriorDesigner, User
 
 
 # Create your views here.
 
+class CustomUserCreateAPIView(APIView):
+    
+    def get(self, request):
+        users = User.objects.all()
+        serializer = CustomUserCreateSerializer(users, many=True)
+        return Response(serializer.data)
+        
+    
+    def post(self, request):
+        serializer = CustomUserCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()  # This will invoke the create method in the serializer
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserDetailsListCreateAPIView(APIView):
     def get(self, request):
         user_details = UserDetails.objects.all()
+        print(user_details)
         serializer = UserDetailsSerializer(user_details, many=True)
         return Response(serializer.data)
     

@@ -13,11 +13,11 @@ from django.contrib.auth.models import User
 
 class UserDetails(models.Model):
     ROLES = (
-        ('Designer', 'Designer'),
-        ('User', 'User')
+        ('designer', 'Designer'),
+        ('user', 'User')
     )
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_details')
-    role = models.CharField(max_length=100, choices=ROLES, default='User')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_details')
+    role = models.CharField(max_length=100, choices=ROLES, default='user')
     contact_number = models.CharField(max_length=15)
     address = models.CharField(max_length=100, blank=True, null=True)
     
