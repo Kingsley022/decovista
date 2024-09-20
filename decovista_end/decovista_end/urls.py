@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('consultation/', include('appointment.urls')),
+    path('consultations/', include('appointment.urls')),
     path('blog/', include('blog.urls')),
     path('cart/', include('cart.urls')),
     path('payment/', include('payment.urls')),
